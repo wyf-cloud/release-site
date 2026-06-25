@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>投标工具 Ver 1.1.9 - 最新功能与下载</title>
+    <meta
+      name="description"
+      content="投标工具 Ver 1.1.9 最新功能展示页，采用岛屿主视觉，重点介绍生产进度表、流程图、生成南网总目录，并提供最新版安装包下载。"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f5f2;
+        --bg-soft: #fcfbf9;
+        --text: #444444;
+        --text-soft: #7e7a74;
+        --line: rgba(69, 62, 54, 0.12);
+        --line-strong: rgba(69, 62, 54, 0.2);
+        --accent: #ef261c;
+        --accent-deep: #cd1109;
+        --shadow: 0 28px 60px rgba(82, 71, 62, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(226, 230, 235, 0.58), transparent 32%),
+          radial-gradient(circle at top right, rgba(240, 235, 230, 0.54), transparent 28%),
+          radial-gradient(circle at 50% 70%, rgba(228, 229, 224, 0.4), transparent 24%),
+          linear-gradient(180deg, #ffffff 0%, #faf8f5 68%, #f6f3ef 100%);
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.9), transparent 38%),
+          radial-gradient(circle at 50% 82%, rgba(222, 224, 226, 0.36), transparent 24%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        left: 50%;
+        bottom: -54vw;
+        width: 156vw;
+        height: 98vw;
+        border-radius: 50%;
+        border: 1px solid rgba(193, 190, 185, 0.36);
+        transform: translateX(-50%);
+        box-shadow: 0 -18px 60px rgba(211, 207, 201, 0.22) inset;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        position: relative;
+        z-index: 1;
+      }
+
+      .site-header,
+      .hero,
+      .feature-strip,
+      .update-band,
+      .site-footer {
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 26px 0 12px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        position: relative;
+        width: 94px;
+        height: 94px;
+        flex: 0 0 94px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #ff3428 0%, #e2170d 100%);
+        box-shadow: 0 22px 40px rgba(239, 38, 28, 0.18);
+      }
+
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        right: 8px;
+        bottom: 6px;
+        width: 22px;
+        height: 26px;
+        background: #e2170d;
+        clip-path: polygon(0 12%, 100% 0, 76% 100%);
+      }
+
+      .brand-mark span {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: #ffffff;
+        font-size: 44px;
+        font-weight: 600;
+        font-style: italic;
+        letter-spacing: 0;
+      }
+
+      .brand-copy {
+        min-width: 0;
+      }
+
+      .brand-copy strong {
+        display: block;
+        font-size: clamp(24px, 2.4vw, 34px);
+        font-weight: 300;
+        line-height: 1;
+        color: #5a5650;
+      }
+
+      .brand-copy span {
+        display: block;
+        margin-top: 6px;
+        color: #97918a;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .site-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 28px;
+        color: #5d5a56;
+        font-size: 16px;
+      }
+
+      .site-nav a {
+        position: relative;
+        padding-bottom: 4px;
+      }
+
+      .site-nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background: rgba(239, 38, 28, 0.65);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.22s ease;
+      }
+
+      .site-nav a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .hero {
+        padding: 18px 0 42px;
+        text-align: center;
+      }
+
+      .hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: #8c8780;
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .hero-label::before,
+      .hero-label::after {
+        content: "";
+        width: 34px;
+        height: 1px;
+        background: rgba(150, 143, 136, 0.35);
+      }
+
+      .hero-visual {
+        position: relative;
+        width: min(100%, 1080px);
+        margin: 24px auto 14px;
+      }
+
+      .hero-visual img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .feature-pills {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin: 6px auto 26px;
+      }
+
+      .feature-pills span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        color: #66615c;
+        font-size: 14px;
+        box-shadow: 0 12px 30px rgba(81, 74, 67, 0.04);
+      }
+
+      .hero h1 {
+        margin: 0 auto 16px;
+        max-width: 920px;
+        font-size: clamp(36px, 4.2vw, 62px);
+        font-weight: 300;
+        line-height: 1.16;
+        letter-spacing: 0;
+        color: #6f6a64;
+        text-wrap: balance;
+      }
+
+      .hero-copy {
+        max-width: 760px;
+        margin: 0 auto;
+        color: var(--text-soft);
+        font-size: 18px;
+        line-height: 1.85;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 26px auto 0;
+      }
+
+      .hero-meta span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 0 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(88, 79, 70, 0.08);
+        background: rgba(255, 255, 255, 0.78);
+        color: #7a736b;
+        font-size: 14px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 164px;
+        min-height: 56px;
+        padding: 0 28px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        font-size: 16px;
+        font-weight: 700;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        color: #ffffff;
+        background: linear-gradient(180deg, #ff3d30 0%, #d20f07 100%);
+        box-shadow: 0 20px 40px rgba(229, 40, 31, 0.2);
+      }
+
+      .btn-secondary {
+        color: #544f4a;
+        background: rgba(255, 255, 255, 0.76);
+        border-color: var(--line);
+      }
+
+      .feature-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+        padding: 34px 0 22px;
+      }
+
+      .feature-card {
+        min-height: 222px;
+        padding: 24px 24px 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.68);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
+      }
+
+      .feature-head {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .feature-head img {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+      }
+
+      .feature-head h2 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.2;
+        color: #383430;
+      }
+
+      .feature-date {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        margin-top: 10px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: rgba(167, 215, 176, 0.22);
+        color: #5f7e66;
+        font-size: 13px;
+      }
+
+      .feature-card p {
+        margin: 16px 0 0;
+        color: #7a736c;
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .contact-band {
+        padding: 26px 0 72px;
+      }
+
+      .qr-card {
+        display: grid;
+        grid-template-columns: 190px minmax(0, 1fr);
+        gap: 22px;
+        align-items: center;
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 22px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 0 18px 42px rgba(82, 71, 62, 0.06);
+      }
+
+      .qr-card img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid rgba(69, 62, 54, 0.08);
+        background: #ffffff;
+      }
+
+      .qr-copy strong {
+        display: block;
+        margin: 0;
+        font-size: 24px;
+        color: #373430;
+      }
+
+      .qr-copy p {
+        margin: 10px 0 0;
+        color: #7b756e;
+        font-size: 15px;
+        line-height: 1.85;
+      }
+
+      .qr-note {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        margin-top: 14px;
+        padding: 0 14px;
+        border-radius: 999px;
+        background: rgba(255, 130, 44, 0.08);
+        color: #b96527;
+        font-size: 13px;
+      }
+
+      .site-footer {
+        padding: 0 0 34px;
+        text-align: center;
+        color: #a19b94;
+        font-size: 12px;
+      }
+
+      @media (max-width: 980px) {
+        .site-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .site-nav {
+          justify-content: flex-start;
+          gap: 18px 24px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .site-header,
+        .hero,
+        .feature-strip,
+        .contact-band,
+        .site-footer {
+          width: min(100%, calc(100% - 28px));
+        }
+
+        .site-header {
+          padding-top: 18px;
+        }
+
+        .brand {
+          align-items: flex-start;
+        }
+
+        .brand-mark {
+          width: 78px;
+          height: 78px;
+          flex-basis: 78px;
+        }
+
+        .brand-mark span {
+          font-size: 36px;
+        }
+
+        .hero {
+          padding-top: 10px;
+        }
+
+        .hero-copy {
+          font-size: 16px;
+        }
+
+        .feature-card {
+          min-height: auto;
+        }
+
+        .qr-card {
+          grid-template-columns: 1fr;
+        }
+
+        .qr-card img {
+          width: min(100%, 220px);
+        }
+
+        .btn {
+          width: 100%;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .btn,
+        .site-nav a::after {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site-header">
+        <a class="brand" href="#home" aria-label="投标工具首页">
+          <div class="brand-mark" aria-hidden="true"><span>tb.</span></div>
+          <div class="brand-copy">
+            <strong>投标工具</strong>
+            <span>Ver 1.1.9 最新功能与下载</span>
+          </div>
+        </a>
+
+        <nav class="site-nav" aria-label="页面导航">
+          <a href="#home">首页</a>
+          <a href="#features">新功能</a>
+          <a href="#download">下载</a>
+          <a href="#contact">联系</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" id="home">
+          <div class="hero-label">Latest Update</div>
+
+          <div class="hero-visual">
+            <img src="assets/island-hero-4k.png" alt="投标工具岛屿主视觉" loading="eager" />
+          </div>
+
+          <div class="feature-pills" aria-label="核心功能">
+            <span>生产进度表</span>
+            <span>流程图</span>
+            <span>生成南网总目录</span>
+          </div>
+
+          <h1>把投标资料里反复整理的工作，收拢成一套更轻快的动作。</h1>
+          <p class="hero-copy">
+            这次更新围绕排期、流程表达和目录汇总三个高频场景展开。主视觉中的岛屿已经单独提取并接入页面，只保留一个下载入口，页面节奏也更接近你给的参考风格。
+          </p>
+
+          <div class="hero-meta">
+            <span>最新版安装包：投标工具 Ver 1.1.9.exe</span>
+            <span>更新日期：2026-06-18</span>
+            <span>安装包大小：334.8 MB</span>
+            <span>下载方式：百度网盘</span>
+          </div>
+
+          <div class="hero-actions" id="download">
+            <a
+              class="btn btn-primary"
+              href="https://pan.baidu.com/s/15sWeo7jvmu585Po7KdbC9g?pwd=xguf"
+              target="_blank"
+              rel="noreferrer"
+            >下载最新版</a>
+            <a class="btn btn-secondary" href="#features">查看新功能</a>
+          </div>
+        </section>
+
+        <section class="feature-strip" id="features" aria-label="三个新功能">
+          <article class="feature-card">
+            <div class="feature-head">
+              <img src="assets/progress.png" alt="生产进度表图标" />
+              <div>
+                <h2>生产进度表</h2>
+                <div class="feature-date">2026-07-10</div>
+              </div>
+            </div>
+            <p>把项目节点、交付计划和关键时间整合成可直接展示的结构，减少手工排版与反复校对。</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-head">
+              <img src="assets/flowchart.png" alt="流程图图标" />
+              <div>
+                <h2>流程图</h2>
+                <div class="feature-date">2026-07-10</div>
+              </div>
+            </div>
+            <p>把复杂步骤压缩成清晰路径，适合方案说明、汇报材料和投标附件里的流程表达。</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-head">
+              <img src="assets/master-toc.png" alt="生成南网总目录图标" />
+              <div>
+                <h2>生成南网总目录</h2>
+                <div class="feature-date">2026-07-10</div>
+              </div>
+            </div>
+            <p>针对南网投标资料的目录汇总场景，帮助统一章节结构和总目录输出，交付时更稳。</p>
+          </article>
+        </section>
+
+        <section class="contact-band" id="contact">
+          <article class="qr-card">
+            <img src="assets/wechat-qr.jpg" alt="微信二维码" loading="lazy" />
+            <div class="qr-copy">
+              <span>微信联系</span>
+              <strong>扫码获取更新与咨询</strong>
+              <p>这个二维码已经融入页面底部信息区，用作联系入口。需要咨询功能、获取新版本，或者反馈使用问题时，直接微信扫码就可以。</p>
+              <div class="qr-note">建议用微信扫一扫保存或识别</div>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="site-footer">投标工具 Ver 1.1.9 最新功能展示页</footer>
+    </div>
+  </body>
+</html>
