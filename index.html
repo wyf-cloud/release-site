@@ -81,6 +81,7 @@
 
       .site-header,
       .hero,
+      .member-band,
       .feature-strip,
       .update-band,
       .site-footer {
@@ -271,6 +272,60 @@
         margin-top: 28px;
       }
 
+      .member-band {
+        padding: 12px 0 10px;
+      }
+
+      .member-panel {
+        display: grid;
+        grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+        gap: 18px 30px;
+        align-items: start;
+        padding: 24px 26px;
+        border: 1px solid rgba(239, 38, 28, 0.12);
+        border-radius: 8px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(250, 246, 240, 0.88) 100%);
+        box-shadow: 0 18px 42px rgba(82, 71, 62, 0.05);
+      }
+
+      .member-summary {
+        display: grid;
+        gap: 12px;
+        justify-items: start;
+      }
+
+      .member-kicker {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 14px;
+        border-radius: 999px;
+        background: rgba(239, 38, 28, 0.08);
+        color: var(--accent-deep);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .member-summary h2 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 1.2;
+        color: #3f3a35;
+      }
+
+      .member-copy p {
+        margin: 0;
+        color: #6b655f;
+        font-size: 15px;
+        line-height: 1.9;
+      }
+
+      .member-copy p + p {
+        margin-top: 10px;
+      }
+
       .btn {
         display: inline-flex;
         align-items: center;
@@ -437,6 +492,14 @@
         .feature-card:last-child {
           grid-column: 1 / -1;
         }
+
+        .member-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .member-summary h2 {
+          font-size: 24px;
+        }
       }
 
       @media (max-width: 720px) {
@@ -446,6 +509,7 @@
 
         .site-header,
         .hero,
+        .member-band,
         .feature-strip,
         .contact-band,
         .site-footer {
@@ -536,6 +600,31 @@
         .hero-actions {
           gap: 10px;
           margin-top: 20px;
+        }
+
+        .member-band {
+          padding: 6px 0 4px;
+        }
+
+        .member-panel {
+          gap: 14px;
+          padding: 18px;
+        }
+
+        .member-kicker {
+          min-height: 30px;
+          padding: 0 12px;
+          font-size: 11px;
+        }
+
+        .member-summary h2 {
+          font-size: 22px;
+          line-height: 1.25;
+        }
+
+        .member-copy p {
+          font-size: 14px;
+          line-height: 1.76;
         }
 
         .btn {
@@ -674,6 +763,19 @@
               rel="noreferrer"
             >下载最新版</a>
             <a class="btn btn-secondary" href="#features">查看新功能</a>
+          </div>
+        </section>
+
+        <section class="member-band" aria-label="会员增值服务">
+          <div class="member-panel">
+            <div class="member-summary">
+              <span class="member-kicker">会员增值服务</span>
+              <h2>每个会员用户每年可获得一次定制功能服务机会</h2>
+            </div>
+            <div class="member-copy">
+              <p>为回馈用户，为每个会员用户提供增值服务，每个会员用户每年可获得一次定制功能服务机会。</p>
+              <p>当工作中碰到无法解决的工作难题且这个难题具有通用性（其它厂家也可能会碰到），蟹老板评估后觉得值得做的功能，这个功能将免费为用户进行定制开发并分享给所有会员用户。</p>
+            </div>
           </div>
         </section>
 
